@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:,">
+<title>GIFs</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:#000;scrollbar-width:thin;scrollbar-color:#333 #000}
+  body{background:#000;color:#e6e6e6;font-family:Georgia,"Times New Roman",serif;padding:clamp(1rem,4vw,3rem) clamp(.6rem,3vw,3rem) 6rem}
+  .head{text-align:center;margin:1rem 0 clamp(2rem,6vw,4rem)}
+  .head h1{font-weight:400;font-size:clamp(1.3rem,3.2vw,2.2rem);letter-spacing:.05em;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.55),0 0 30px rgba(255,255,255,.25)}
+  .piece{display:flex;justify-content:center;margin:0 auto clamp(2.5rem,8vw,6rem);transition:opacity 1.2s ease,transform 1.2s ease}
+  .js .piece:not(.in){opacity:0;transform:translateY(14px)}
+  .piece img{display:block;max-width:100%;height:auto;max-height:92vh;max-height:92dvh;width:auto;object-fit:contain}
+  .back{position:fixed;left:max(1rem,env(safe-area-inset-left));bottom:max(1rem,env(safe-area-inset-bottom));color:#e6e6e6;text-decoration:none;font-size:.9rem;letter-spacing:.08em;text-shadow:0 0 6px rgba(255,255,255,.5),0 0 16px rgba(255,255,255,.25);background:rgba(0,0,0,.55);padding:.35rem .7rem;border-radius:2px;opacity:.75;transition:opacity .3s ease,text-shadow .3s ease;z-index:5}
+  .back:hover,.back:focus-visible{opacity:1;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.9),0 0 26px rgba(255,255,255,.5);outline:none}
+  @media (prefers-reduced-motion:reduce){.piece,.js .piece:not(.in){transition:none;opacity:1;transform:none}.back{transition:none}}
+</style>
+</head>
+<body>
+<header class="head"><h1>GIFs</h1></header>
+<main>
+  <figure class="piece">
+    <img src="g-01.gif" decoding="async" alt="Un ojo azul en el centro de una espiral de texto blanco sobre fondo negro que gira: «Del sueño al verbo, del verbo al universo. Del número al símbolo»." width="998" height="640">
+  </figure>
+  <figure class="piece">
+    <img src="g-02.gif" decoding="async" alt="Ventana retro de ordenador titulada «illusion.exe – cruel_hoax»: un sol blanco y pixelado sobre un cielo azul, con una figura de espaldas que lo mira y fallas de imagen en los bordes." width="540" height="477" loading="lazy">
+  </figure>
+  <figure class="piece">
+    <img src="g-03.gif" decoding="async" alt="Dibujo a tinta de dos seres alados y peludos que se acercan; entre ellos aparecen corazones, emojis y letras pixeladas." width="720" height="405" loading="lazy">
+  </figure>
+  <figure class="piece">
+    <img src="g-04.gif" decoding="async" alt="Paisaje nocturno hecho de puntos, con árboles de hojas cuadradas, montañas y una cascada de números y cuadros de colores que cae sobre un campo." width="1200" height="848" loading="lazy">
+  </figure>
+  <figure class="piece">
+    <img src="g-05.gif" decoding="async" alt="Rostro rojo con ojos azules enormes y cabello blanco, dibujado con trama de tinta, entre cuadros azules que flotan." width="1333" height="800" loading="lazy">
+  </figure>
+</main>
+<a class="back" href="https://metafobian-code.github.io/metafobia/">← Metafobia</a>
+<script>
+  (function () {
+    var els = document.querySelectorAll(".piece");
+    var show = function (el) { el.classList.add("in"); };
+    try {
+      if ("IntersectionObserver" in window) {
+        document.documentElement.classList.add("js");
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+        }, { threshold: 0 });
+        els.forEach(function (el) { io.observe(el); });
+        // red de seguridad: pase lo que pase, todo se muestra
+        setTimeout(function () { els.forEach(show); }, 2500);
+      } else { els.forEach(show); }
+    } catch (err) { els.forEach(show); }
+  })();
+</script>
+</body>
+</html>
